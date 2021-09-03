@@ -1,15 +1,35 @@
 {block content}
 <div class="container">
-    <div class="row">
+    <div class="row mb-3">
         <h1 class="text-center">Pig Latin Translator</h1>
     </div>
-    <div class="row">
+    <div class="row mb-3">
         <div class="col">
-            <textarea onkeyup="Func()" id="english" cols="60" rows="15"></textarea>
+            <textarea placeholder="English text here..." id="english" cols="50" rows="15"></textarea>
         </div>
         <div class="col">
-            <textarea id="pig-latin" cols="60" rows="15"></textarea>
+            <textarea placeholder="Translation to pig latin..." id="pig-latin" cols="50" rows="15"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <label for="dialect">Dialect:</label>
+            <select id="dialect" class="btn" aria-label="Default select example">
+                <option value="yay" selected>yay</option>
+                <option value="hay">hay</option>
+                <option value="way">way</option>
+            </select>
+        </div>
+        <div class="col text-center">
+            <button class="btn btn-primary" onclick="Translate()">Translate</button>
         </div>
     </div>
 </div>
+
+<style>
+    textarea {
+        font-size: 18px;
+    }
+</style>
 {/block}
+
