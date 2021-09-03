@@ -1,34 +1,51 @@
-Nette Web Project
-=================
+Pig Latin Translator
+--------------------
+Author: Martin Koči
+Email: mkoci11@gmail.com
 
-This is a simple, skeleton application using the [Nette](https://nette.org). This is meant to
-be used as a starting point for your new projects.
+Translator from english to pig latin. This translator support translation of words and sentences. Ignores
+not alphanumerical characters at beginning, between words and ending it just leave them where they supposed to be.
+It also supports different dialects and correct lower and upper case.
 
-[Nette](https://nette.org) is a popular tool for PHP web development.
-It is designed to be the most usable and friendliest as possible. It focuses
-on security and performance and is definitely one of the safest PHP frameworks.
+Examples of translation
+-----------------------
+In words that begin with consonant sounds, the initial consonant or consonant cluster is
+moved to the end of the word, and “ay“ is added, as in the following examples:
 
-If you like Nette, **[please make a donation now](https://nette.org/donate)**. Thank you!
+beast → east-bay </br>
+dough → ough-day </br>
+happy → appy-hay </br>
+question → estion-quay </br>
+star → ar-stay </br>
+three → ee-thray </br>
 
+In words that begin with vowel sounds or silent consonants, the syllable “ay“ is added to the
+end of the word. In some dialects, to aid in pronunciation, an extra consonant is added to the
+beginning of the suffix; for instance,eagle could yield eagle‘yay, eagle‘way, or eagle‘hay.
 
 Requirements
 ------------
 
 - Web Project for Nette 3.1 requires PHP 7.2
 
+Testing of translation
+----------------------
 
-Installation
-------------
+You can test it in browser in localhost.
 
-The best way to install Web Project is using Composer. If you don't have Composer yet,
-download it following [the instructions](https://doc.nette.org/composer). Then use command:
+Or u can just send http request to localhost at /homepage/translation URL with 2 parameters value and dialect.
 
-	composer create-project nette/web-project path/to/install
-	cd path/to/install
+Example:
+```bash
+curl localhost:8000/homepage/translate?value=Hello\&dialect=yay
+```
 
-
-Make directories `temp/` and `log/` writable.
-
+Response:
+```json
+{
+  "pig-latin":"Ello-hay"
+}
+```
 
 Web Server Setup
 ----------------
