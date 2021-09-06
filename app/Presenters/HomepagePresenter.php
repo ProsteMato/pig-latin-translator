@@ -3,6 +3,8 @@
  * This file is implementing an english to pig latin translator. Pig latin translator supports translation of word
  * and sentences. It also supports different dialects.
  *
+ * @todo Make difference between "y" as vowel and "y" as a consonant.
+ *
  * @author Martin Koči <mkoci11@gmail.com>
  */
 
@@ -24,8 +26,8 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
     public function __construct()
     {
         parent::__construct();
-        $this->consonant = '/^([^aeiouy]+)(.*)/i';
-        $this->vowel = '/^([aeiouy]+)(.*)/i';
+        $this->consonant = '/^([^aeiou]+)(.*)/i';
+        $this->vowel = '/^([aeiou]+)(.*)/i';
         $this->other = '/^((qu)+)(.*)/i';
         $this->notWord = '/([^[:alnum:]]+)/i';
     }
@@ -49,7 +51,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      * @param string $dialect Chosen dialect.
      * @return string Translated string to pig latin.
      */
-    private function translate(string $value, string $dialect): string
+    public function translate(string $value, string $dialect): string
     {
         $translated_string = "";
 
@@ -60,7 +62,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
             $capitalized = false;
 
             //Check if first char of english word is upper.
-            if (!empty($word) && ctype_upper($word[0])) {
+            if (!empty($word) && preg_match('/^[A-Z]/', $word)) {
                 $capitalized = true;
                 $word = lcfirst($word);
             }
@@ -85,7 +87,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      * @param string $dialect Chosen dialect.
      * @return string Translated word.
      */
-    private function translateWord(string $word, string $dialect): string
+    public function translateWord(string $word, string $dialect): string
     {
         $translated_string = "";
         if (preg_match($this->notWord, $word)) { // no alphanumerical characters
@@ -93,7 +95,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         } elseif (preg_match($this->vowel, $word)) { // begins with vowels
             $translated_string = preg_replace($this->vowel, "$1$2-" . $dialect, $word);
         } elseif (preg_match($this->other, $word)) { // begins with silent consonant
-            $translated_string = preg_replace($this->other, "$3-$1" . $dialect, $word);
+            $translated_string = preg_replace($this->other, "$3-$1ay", $word);
         } elseif (preg_match($this->consonant, $word)) { // begins with consonant or cluster of consonants
             $translated_string = preg_replace($this->consonant, "$2-$1ay", $word);
         }
