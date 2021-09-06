@@ -41,7 +41,7 @@ composer install
 
 then run for creating a web server:
 ```bash
-php -S localhost:8000 -t www
+sudo php -S localhost:8000 -t www
 ```
 Then visit `http://localhost:8000` in your browser to see the pig latin translator.
 
