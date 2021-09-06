@@ -31,7 +31,7 @@ Requirements
 Testing of translation
 ----------------------
 
-You can test it in browser in localhost.
+You can test it in browser on localhost.
 
 Or u can just send http request to localhost at /homepage/translation URL with 2 parameters value and dialect.
 
@@ -45,6 +45,12 @@ Response:
 {
   "pig-latin":"Ello-hay"
 }
+```
+
+Or u can test functionality of translation method with Nette tester
+
+```bash
+vendor/bin/tester .
 ```
 
 Web Server Setup
